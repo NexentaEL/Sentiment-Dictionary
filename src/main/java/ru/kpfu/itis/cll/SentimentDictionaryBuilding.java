@@ -9,7 +9,16 @@ import java.util.Map;
  * Главный класс приложения, отсюда происходит запуск.
  */
 public class SentimentDictionaryBuilding {
-    public static void main(String[] args) throws SQLException, IOException, ClassNotFoundException {
+    /**
+     * Создаёт таблицы в базе данных, заполняет таблицу sentiments, подготавливает в базе данных информацию
+     * об уже имеющихся словах из словарей, обрабатывает пары понятие-понятие, когда второе понятие ниже
+     * первого по иерархии, выводит полученный словарь с тональностью и иерархией (всё это происходит посредством
+     * последовательного запуска из этого метода других соответствующих методов).
+     * @param args аргументы командной строки (не используются)
+     * @throws SQLException
+     * @throws IOException
+     */
+    public static void main(String[] args) throws SQLException, IOException {
         // создание коллекции исходных словарей с указанием их sentiment_id
         // 1 - positive; 2 - negative; 3 - positive/negative; 4 - neutral
         Map<String, Integer> dictionariesWithSentimentId = new HashMap<>();

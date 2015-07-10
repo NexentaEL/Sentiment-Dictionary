@@ -17,39 +17,39 @@ public class DataBaseCreating {
 
     /**
      * Метод-обёртка методов createTables и insertIntoSentimentsTable (последовательно вызывает эти методы).
+     * @throws SQLException
+     * @throws IOException
      */
-    public static void create() throws SQLException, IOException, ClassNotFoundException {
+    public static void create() throws SQLException, IOException {
         createTables();
         insertIntoSentimentsTable();
     }
 
     /**
      * Создание всех таблиц, скрипты для создания берутся из create.sql в resources/dbScripts.
+     * @throws SQLException
+     * @throws IOException
      */
-    public static void createTables() throws SQLException, ClassNotFoundException, IOException {
-        Class.forName("org.postgresql.Driver");
+    public static void createTables() throws SQLException, IOException {
         Connection cn = DriverManager.getConnection(DataBaseProperties.DATA_BASE_URL, DataBaseProperties.DATA_BASE_USER, DataBaseProperties.DATA_BASE_PASSWORD);
         Statement st = cn.createStatement();
-
         File SQLForCreating = new File("resources/dbScripts/create.sql");
         st.execute(FileUtils.readFileToString(SQLForCreating));
-        System.out.println("Tables in data base created");
-
-        cn.close();
-        st.close();
+        System.out.println("After method createTables in DataBaseCreating \n");
     }
 
     /**
      * Заполнение таблицы sentiments, скрипты для вставки берутся из insert.sql в resources/dbScripts.
+     * @throws SQLException
+     * @throws IOException
      */
-    public static void insertIntoSentimentsTable() throws SQLException, ClassNotFoundException, IOException {
-        Class.forName("org.postgresql.Driver");
+    public static void insertIntoSentimentsTable() throws SQLException, IOException {
         Connection cn = DriverManager.getConnection(DataBaseProperties.DATA_BASE_URL, DataBaseProperties.DATA_BASE_USER, DataBaseProperties.DATA_BASE_PASSWORD);
         Statement st = cn.createStatement();
 
         File SQLForInserting = new File("resources/dbScripts/insert.sql");
         st.execute(FileUtils.readFileToString(SQLForInserting));
-        System.out.println("Sentiments defined in sentiments table");
+        System.out.println("After method insertIntoSentimentsTable in DataBaseCreating \n");
 
         cn.close();
         st.close();

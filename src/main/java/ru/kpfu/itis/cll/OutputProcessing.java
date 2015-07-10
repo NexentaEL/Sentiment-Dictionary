@@ -14,9 +14,9 @@ public class OutputProcessing {
     /**
      * Выводит все слова из таблицы words c указанием их sentiment и со словами, которые находятся ниже
      * по иерархии (и, соответственно, получили такой же sentiment_id).
+     * @throws SQLException
      */
-    public static void sentimentDictionaryOutput() throws ClassNotFoundException, SQLException {
-        Class.forName("org.postgresql.Driver");
+    public static void sentimentDictionaryOutput() throws SQLException {
         Connection cn = DriverManager.getConnection(DataBaseProperties.DATA_BASE_URL, DataBaseProperties.DATA_BASE_USER, DataBaseProperties.DATA_BASE_PASSWORD);
         Statement st1 = cn.createStatement();
         ResultSet rs1 = st1.executeQuery("select words.id as id, " +
@@ -48,5 +48,6 @@ public class OutputProcessing {
         }
         cn.close();
         st1.close();
+        System.out.println("After method sentimentDictionaryOutput in OutputProcessing \n");
     }
 }
