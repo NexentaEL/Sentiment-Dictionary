@@ -26,7 +26,8 @@ public class DataBaseCreating {
     }
 
     /**
-     * Создание всех таблиц, скрипты для создания берутся из create.sql в resources/dbScripts.
+     * Удаление старых таблиц (если они существовали) и создание новых таблиц, скрипты для создания берутся
+     * из create.sql в resources/dbScripts.
      * @throws SQLException
      * @throws IOException
      */
